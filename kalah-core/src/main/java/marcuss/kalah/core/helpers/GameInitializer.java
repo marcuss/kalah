@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 
 public class GameInitializer {
 
-    public static Board initKalah(int houses, final int seeds) {
+    static Board initKalah(int houses, final int seeds) {
         return Board.builder()
                 .houses1(initHouses(houses, seeds))
                 .houses2(initHouses(houses, seeds))

@@ -1,6 +1,6 @@
 package marcuss.kalah.core.domain;
 
-public class Move {
+public class MoveResult {
 
     public static enum State {
         STARTED, RUNNING, FINISHED
