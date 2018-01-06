@@ -1,9 +1,9 @@
 package marcuss.kalah.core.domain;
 
-public class Result {
+public class Move {
 
     public static enum State {
-        STARTED, FINISHED
+        STARTED, RUNNING, FINISHED
     }
 
     public static enum Turn {
