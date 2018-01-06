@@ -2,6 +2,8 @@ package marcuss.kalah.core.helpers;
 
 import marcuss.kalah.core.domain.Board;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,26 +12,42 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class GameInitializerTest {
 
-    @Test
-    void testInitKalah6x4() {
-        int houses = 6;
-        int seeds = 4;
-        Board board6x4 = GameInitializer.initKalah(houses, seeds);
+    @ParameterizedTest
+    @CsvSource({"6, 4", "4, 2", "3,3", "0,0", "1,0"})
+    void testInitKalah(int houses, int seeds) {
+        Board board = GameInitializer.initKalah(houses, seeds);
 
         assertEquals(houses,
-                board6x4.getHouses1().stream().filter(h -> h == seeds)
+                board.getHouses1().stream().filter(h -> h == seeds)
                         .count()
         );
 
         assertEquals(houses,
-                board6x4.getHouses2().stream().filter(h -> h == seeds)
+                board.getHouses2().stream().filter(h -> h == seeds)
                         .count()
+        );
+
+        assertEquals(houses * 2 * seeds,
+                board.getHouses2().stream()
+                        .mapToInt(Integer::intValue).sum()
+                        +
+                        board.getHouses2().stream()
+                                .mapToInt(Integer::intValue).sum()
         );
 
         assertEquals(
-                board6x4.getHouses1().size(),
-                board6x4.getHouses2().size()
+                board.getHouses1().size(),
+                board.getHouses2().size()
+        );
+
+        assertEquals(
+                0,
+                board.getStore1()
+        );
+
+        assertEquals(
+                0,
+                board.getStore2()
         );
     }
-
 }
