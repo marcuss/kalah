@@ -1,25 +1,17 @@
 package marcuss.kalah.core.helpers;
 
-import marcuss.kalah.core.domain.Board;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import marcuss.kalah.core.AwariGame;
+import marcuss.kalah.core.CustomGame;
+import marcuss.kalah.core.Game;
+import marcuss.kalah.core.engine.config.GameConfig;
 
 public class GameInitializer {
 
-    static Board initKalah(int houses, final int seeds) {
-        return Board.builder()
-                .houses1(initHouses(houses, seeds))
-                .houses2(initHouses(houses, seeds))
-                .build();
-
+    public static Game startGame(GameConfig config) {
+        if (config.equals(GameConfig.DEFAULT)) {
+            return new AwariGame(config);
+        } else {
+            return new CustomGame(config);
+        }
     }
-
-    private static List<Integer> initHouses(int houses, int seeds) {
-        return IntStream.range(0, houses)
-                .mapToObj(i -> new Integer(seeds))
-                .collect(Collectors.toList());
-    }
-
 }
