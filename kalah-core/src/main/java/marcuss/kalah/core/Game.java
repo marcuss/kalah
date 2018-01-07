@@ -2,10 +2,13 @@ package marcuss.kalah.core;
 
 import lombok.Data;
 import marcuss.kalah.core.domain.Board;
+import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.GameEngine;
 import marcuss.kalah.core.engine.config.GameConfig;
-import marcuss.kalah.core.factories.GameFactory;
 import marcuss.kalah.core.helpers.BoardInitializer;
+
+import static marcuss.kalah.core.domain.Move.State.STARTED;
+import static marcuss.kalah.core.domain.Move.Turn.PLAYER1;
 
 @Data
 public abstract class Game {
@@ -14,18 +17,25 @@ public abstract class Game {
 
     private Board board;
 
+    private Move currentMove;
+
     public static Game startGame(GameConfig config) {
         if (config.equals(GameConfig.DEFAULT)) {
             return new AwariGame(config);
         } else {
-            return GameFactory.createCustomGame(config);
+            return new CustomGame(config);
         }
     }
 
     public Game(GameConfig config) {
-        engine = initGameEngine();
+        engine = makeEngine(config);
         board = BoardInitializer.initKalah(config.getHouses(), config.getSeeds());
+        currentMove = Move.builder()
+                .currentBoard(board)
+                .state(STARTED)
+                .turn(PLAYER1)
+                .build();
     }
 
-    public abstract GameEngine initGameEngine();
+    protected abstract GameEngine makeEngine(GameConfig config);
 }

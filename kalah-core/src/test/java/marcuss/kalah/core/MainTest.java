@@ -8,6 +8,8 @@ import marcuss.kalah.core.engine.strategies.CounterClockWiseStepping;
 import marcuss.kalah.core.engine.strategies.RegularCaptureStratey;
 import org.junit.Test;
 
+import static marcuss.kalah.core.domain.Move.State.STARTED;
+import static marcuss.kalah.core.domain.Move.Turn.PLAYER1;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MainTest {
@@ -53,6 +55,16 @@ public class MainTest {
         assertEquals(
                 CountRemainingScoreStrategy.class,
                 game.getEngine().getScoringStrategy().getClass()
+        );
+
+        assertEquals(
+                STARTED,
+                game.getCurrentMove().getState()
+        );
+
+        assertEquals(
+                PLAYER1,
+                game.getCurrentMove().getTurn()
         );
     }
 }

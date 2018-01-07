@@ -1,5 +1,10 @@
 package marcuss.kalah.core.domain;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class Move {
 
     public static enum State {

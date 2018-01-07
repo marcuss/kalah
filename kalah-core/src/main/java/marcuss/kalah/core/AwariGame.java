@@ -10,8 +10,7 @@ public class AwariGame extends Game {
         super(config);
     }
 
-    @Override
-    public GameEngine initGameEngine() {
+    public GameEngine makeEngine(GameConfig config) {
         return new AwariGameEngine();
     }
 }
