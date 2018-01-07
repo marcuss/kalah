@@ -5,7 +5,7 @@ import marcuss.kalah.core.domain.Move;
 public class AwariGameEngine extends GameEngine {
 
     @Override
-    public Move move(Move move) {
+    protected Move doMove(Move move, int house) {
         return move;
     }
 }

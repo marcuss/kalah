@@ -37,5 +37,9 @@ public abstract class Game {
                 .build();
     }
 
+    public Move move(int house){
+        return engine.move(currentMove, house);
+    }
+
     protected abstract GameEngine makeEngine(GameConfig config);
 }
