@@ -12,6 +12,8 @@ public class BoardInitializer {
         return Board.builder()
                 .houses1(initHouses(houses, seeds))
                 .houses2(initHouses(houses, seeds))
+                .store1(Board.Element.builder().value(0).build())
+                .store2(Board.Element.builder().value(0).build())
                 .build();
     }
 

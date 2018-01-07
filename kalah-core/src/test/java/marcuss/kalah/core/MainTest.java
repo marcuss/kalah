@@ -103,5 +103,42 @@ public class MainTest {
                 new Integer(0),
                 game.getBoard().getHouses1().get(3).getValue()
         );
+
+        assertEquals(
+                new Integer(7),
+                game.getBoard().getHouses1().get(2).getValue()
+        );
+
+        assertEquals(
+                new Integer(7),
+                game.getBoard().getHouses1().get(1).getValue()
+        );
+
+        assertEquals(
+                new Integer(7),
+                game.getBoard().getHouses1().get(0).getValue()
+        );
+
+        assertEquals(
+                new Integer(1),
+                game.getBoard().getStore1().getValue()
+        );
+
+
+        assertEquals(
+                new Integer(7),
+                game.getBoard().getHouses2().get(0).getValue()
+        );
+
+        assertEquals(
+                new Integer(7),
+                game.getBoard().getHouses2().get(1).getValue()
+        );
+
+        assertEquals(
+                new Integer(6),
+                game.getBoard().getHouses2().get(2).getValue()
+        );
+
     }
 }

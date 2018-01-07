@@ -35,11 +35,13 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
 
         private final Move current;
         private final int house;
+        private int currentPos;
         private List<Element> internalState = new ArrayList<>();
 
         public CounterClockWiseIterator(Move current, int house) {
             this.current = current;
             this.house = house;
+            this.currentPos = 0;
             buildInternalState(current, house);
         }
 
@@ -52,7 +54,7 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
                     }
                     internalState.add(board.getStore1());
                     internalState.addAll(board.getHouses2());
-                    for (int i = board.getHouses1().size() - 1; i <= house; i--) {
+                    for (int i = board.getHouses1().size() - 1; i > house; i--) {
                         internalState.add(board.getHouses1().get(i));
                     }
                     break;
@@ -77,16 +79,14 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
 
         @Override
         public boolean hasNext() {
-            if (!internalState.iterator().hasNext()) {
-                //go round
-                buildInternalState(current, house);
-            }
             return true;
         }
 
         @Override
         public Element next() {
-            return internalState.iterator().next();
+            // go round
+            if (currentPos >= internalState.size()) currentPos = 0;
+            return internalState.get(currentPos++);
         }
     }
 }
