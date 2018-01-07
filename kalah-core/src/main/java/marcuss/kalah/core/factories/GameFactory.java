@@ -12,7 +12,9 @@ public class GameFactory {
     public static Game createCustomGame(GameConfig config) {
         CustomGame game = new CustomGame(config);
         GameEngine engine = new CustomGameEngine();
-        StrategyChooserHelper.setStepppingDirectionStrategy(config.getDirection(), engine);
+        StrategyChooserHelper.setSteppingDirectionStrategy(config.getDirection(), engine);
+        StrategyChooserHelper.setCaptureStrategy(config.getEmptyCapture(), engine);
+        StrategyChooserHelper.setScoringStrategy(config.getCountRemainingSeeds(), engine);
         game.setEngine(engine);
         return game;
     }

@@ -2,12 +2,18 @@ package marcuss.kalah.core.engine;
 
 import lombok.Data;
 import marcuss.kalah.core.domain.Move;
+import marcuss.kalah.core.engine.strategies.CaptureStrategy;
+import marcuss.kalah.core.engine.strategies.ScoringStrategy;
 import marcuss.kalah.core.engine.strategies.SteppingDirectionStrategy;
 
 @Data
 public abstract class GameEngine {
 
     protected SteppingDirectionStrategy steppingStrategy;
+
+    protected CaptureStrategy captureStrategy;
+
+    protected ScoringStrategy scoringStrategy;
 
     public abstract Move move(Move move);
 }

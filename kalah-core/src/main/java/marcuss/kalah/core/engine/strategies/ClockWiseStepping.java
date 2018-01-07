@@ -4,7 +4,7 @@ import marcuss.kalah.core.engine.config.GameConfig;
 
 public class ClockWiseStepping implements SteppingDirectionStrategy {
 
-    //todo: improve as necessary
+    //todo: improve singleton as necessary
     private static ClockWiseStepping instance = new ClockWiseStepping();
 
     public static SteppingDirectionStrategy getInstance() {

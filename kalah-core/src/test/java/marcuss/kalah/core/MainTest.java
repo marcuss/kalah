@@ -3,7 +3,9 @@ package marcuss.kalah.core;
 import marcuss.kalah.core.engine.AwariGameEngine;
 import marcuss.kalah.core.engine.CustomGameEngine;
 import marcuss.kalah.core.engine.config.GameConfig;
+import marcuss.kalah.core.engine.strategies.CountRemainingScoreStrategy;
 import marcuss.kalah.core.engine.strategies.CounterClockWiseStepping;
+import marcuss.kalah.core.engine.strategies.RegularCaptureStratey;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -41,6 +43,16 @@ public class MainTest {
         assertEquals(
                 CounterClockWiseStepping.class,
                 game.getEngine().getSteppingStrategy().getClass()
+        );
+
+        assertEquals(
+                RegularCaptureStratey.class,
+                game.getEngine().getCaptureStrategy().getClass()
+        );
+
+        assertEquals(
+                CountRemainingScoreStrategy.class,
+                game.getEngine().getScoringStrategy().getClass()
         );
     }
 }
