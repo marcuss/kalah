@@ -11,9 +11,9 @@ public class GameConfig {
 
     private int seeds;
 
-    public enum GameDirection {COUNTER_CLOCKWISE, CLOCKWISE}
+    public enum SteppingDirection {COUNTER_CLOCKWISE, CLOCKWISE}
 
-    private GameDirection direction;
+    private SteppingDirection direction;
 
     private Boolean emptyCapture;
 
@@ -24,7 +24,7 @@ public class GameConfig {
     public static GameConfig DEFAULT = GameConfig.builder()
             .houses(6)
             .seeds(3)
-            .direction(GameDirection.COUNTER_CLOCKWISE)
+            .direction(SteppingDirection.COUNTER_CLOCKWISE)
             .emptyCapture(false)
             .countRemainingSeeds(true)
             .pieRuleActive(false)

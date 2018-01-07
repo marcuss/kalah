@@ -3,7 +3,7 @@ package marcuss.kalah.core;
 import marcuss.kalah.core.engine.AwariGameEngine;
 import marcuss.kalah.core.engine.CustomGameEngine;
 import marcuss.kalah.core.engine.config.GameConfig;
-import marcuss.kalah.core.helpers.GameInitializer;
+import marcuss.kalah.core.engine.strategies.CounterClockWiseStepping;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +12,7 @@ public class MainTest {
 
     @Test
     public void testStartDefaultGame() {
-        Game game = GameInitializer.startGame(GameConfig.DEFAULT);
+        Game game = Game.startGame(GameConfig.DEFAULT);
 
         assertEquals(
                 AwariGameEngine.class,
@@ -22,10 +22,10 @@ public class MainTest {
 
     @Test
     public void testStartCustomGame() {
-        Game game = GameInitializer.startGame(
+        Game game = Game.startGame(
                 GameConfig.builder()
                         .countRemainingSeeds(true)
-                        .direction(GameConfig.GameDirection.COUNTER_CLOCKWISE)
+                        .direction(GameConfig.SteppingDirection.COUNTER_CLOCKWISE)
                         .emptyCapture(false)
                         .houses(6)
                         .seeds(6)
@@ -36,6 +36,11 @@ public class MainTest {
         assertEquals(
                 CustomGameEngine.class,
                 game.getEngine().getClass()
+        );
+
+        assertEquals(
+                CounterClockWiseStepping.class,
+                game.getEngine().getSteppingStrategy().getClass()
         );
     }
 }
