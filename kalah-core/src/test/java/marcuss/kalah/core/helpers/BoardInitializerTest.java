@@ -1,6 +1,7 @@
 package marcuss.kalah.core.helpers;
 
 import marcuss.kalah.core.domain.Board;
+import marcuss.kalah.core.domain.Board.Element;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,21 +18,21 @@ class BoardInitializerTest {
         Board board = BoardInitializer.initKalah(houses, seeds);
 
         assertEquals(houses,
-                board.getHouses1().stream().filter(h -> h == seeds)
+                board.getHouses1().stream().filter(h -> h.getValue() == seeds)
                         .count()
         );
 
         assertEquals(houses,
-                board.getHouses2().stream().filter(h -> h == seeds)
+                board.getHouses2().stream().filter(h -> h.getValue() == seeds)
                         .count()
         );
 
         assertEquals(houses * 2 * seeds,
                 board.getHouses2().stream()
-                        .mapToInt(Integer::intValue).sum()
+                        .mapToInt(Element::getValue).sum()
                         +
                         board.getHouses2().stream()
-                                .mapToInt(Integer::intValue).sum()
+                                .mapToInt(Element::getValue).sum()
         );
 
         assertEquals(

@@ -9,15 +9,21 @@ import java.util.function.Consumer;
 
 @Data
 @Builder
-public class Board implements Iterable<Integer>{
+public class Board implements Iterable<Board.Element>{
 
-    private Integer store1;
+    @Data
+    @Builder
+    public static class Element{
+        Integer value;
+    }
 
-    private Integer store2;
+    private Element store1;
 
-    private List<Integer> houses1;
+    private Element store2;
 
-    private List<Integer> houses2;
+    private List<Element> houses1;
+
+    private List<Element> houses2;
 
     private Iterator boardIterator;
 

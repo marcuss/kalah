@@ -101,7 +101,7 @@ public class MainTest {
 
         assertEquals(
                 new Integer(0),
-                game.getBoard().getHouses1().get(3)
+                game.getBoard().getHouses1().get(3).getValue()
         );
     }
 }

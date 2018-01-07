@@ -13,12 +13,11 @@ public class BoardInitializer {
                 .houses1(initHouses(houses, seeds))
                 .houses2(initHouses(houses, seeds))
                 .build();
-
     }
 
-    private static List<Integer> initHouses(int houses, int seeds) {
+    private static List<Board.Element> initHouses(int houses, int seeds) {
         return IntStream.range(0, houses)
-                .mapToObj(i -> new Integer(seeds))
+                .mapToObj(i -> Board.Element.builder().value(seeds).build())
                 .collect(Collectors.toList());
     }
 

@@ -1,6 +1,7 @@
 package marcuss.kalah.core.engine.strategies;
 
 import marcuss.kalah.core.domain.Board;
+import marcuss.kalah.core.domain.Board.Element;
 import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.config.GameConfig;
 
@@ -20,7 +21,7 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
     }
 
     @Override
-    public Iterator<Integer> getIterator(Move current, int house) {
+    public Iterator<Element> getIterator(Move current, int house) {
         return new CounterClockWiseIterator(current, house);
     }
 
@@ -30,11 +31,11 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
     }
 
 
-    class CounterClockWiseIterator implements Iterator<Integer> {
+    class CounterClockWiseIterator implements Iterator<Element> {
 
         private final Move current;
         private final int house;
-        private List<Integer> internalState = new ArrayList<>();
+        private List<Element> internalState = new ArrayList<>();
 
         public CounterClockWiseIterator(Move current, int house) {
             this.current = current;
@@ -84,7 +85,7 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
         }
 
         @Override
-        public Integer next() {
+        public Element next() {
             return internalState.iterator().next();
         }
     }
