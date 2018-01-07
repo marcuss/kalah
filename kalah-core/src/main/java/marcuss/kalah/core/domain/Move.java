@@ -1,13 +1,13 @@
 package marcuss.kalah.core.domain;
 
-public class MoveResult {
+public class Move {
 
     public static enum State {
         STARTED, RUNNING, FINISHED
     }
 
     public static enum Turn {
-        CONTINUE, CHANGE
+        PLAYER1, PLAYER2
     }
 
     private Board currentBoard;
