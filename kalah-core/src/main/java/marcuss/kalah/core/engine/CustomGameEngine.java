@@ -9,11 +9,9 @@ public class CustomGameEngine extends GameEngine {
     protected Move doMove(Move move, int house) {
         Board board = move.getCurrentBoard();
         board.setBoardIterator(
-                steppingStrategy.getIterator(move.getTurn(), house)
+                steppingStrategy.getIterator(move, house)
         );
-        for (Integer element : board) {
 
-        }
         return move;
     }
 }

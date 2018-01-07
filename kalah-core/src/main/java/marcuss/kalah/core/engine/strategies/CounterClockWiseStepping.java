@@ -46,12 +46,12 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
             Board board = current.getCurrentBoard();
             switch (current.getTurn()) {
                 case PLAYER1:
-                    for (int i = house; i < 0; i--) {
+                    for (int i = house; i >= 0; i--) {
                         internalState.add(board.getHouses1().get(i));
                     }
                     internalState.add(board.getStore1());
                     internalState.addAll(board.getHouses2());
-                    for (int i = board.getHouses1().size() - 1; i < house; i--) {
+                    for (int i = board.getHouses1().size() - 1; i <= house; i--) {
                         internalState.add(board.getHouses1().get(i));
                     }
                     break;

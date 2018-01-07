@@ -38,7 +38,9 @@ public abstract class Game {
     }
 
     public Move move(int house){
-        return engine.move(currentMove, house);
+        Move resultMove = engine.move(currentMove, house);
+        board = resultMove.getCurrentBoard();
+        return resultMove;
     }
 
     protected abstract GameEngine makeEngine(GameConfig config);

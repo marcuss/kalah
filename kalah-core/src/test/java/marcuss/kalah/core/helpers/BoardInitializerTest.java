@@ -40,12 +40,12 @@ class BoardInitializerTest {
         );
 
         assertEquals(
-                0,
+                new Integer(0),
                 board.getStore1()
         );
 
         assertEquals(
-                0,
+                new Integer(0),
                 board.getStore2()
         );
     }

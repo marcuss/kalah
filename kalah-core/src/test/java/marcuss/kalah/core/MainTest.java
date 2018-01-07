@@ -98,5 +98,10 @@ public class MainTest {
         Move currentMove = game.move(3);
 
         assertNotNull(currentMove);
+
+        assertEquals(
+                new Integer(0),
+                game.getBoard().getHouses1().get(3)
+        );
     }
 }
