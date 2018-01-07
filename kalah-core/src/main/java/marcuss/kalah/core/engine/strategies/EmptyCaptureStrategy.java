@@ -1,5 +1,8 @@
 package marcuss.kalah.core.engine.strategies;
 
+import marcuss.kalah.core.domain.Board.Element;
+import marcuss.kalah.core.domain.Move;
+
 public class EmptyCaptureStrategy implements CaptureStrategy {
 
     //todo: improve singleton as necessary
@@ -11,5 +14,10 @@ public class EmptyCaptureStrategy implements CaptureStrategy {
 
     public boolean appliesTo(Boolean emptyCapture) {
         return emptyCapture;
+    }
+
+    @Override
+    public void capture(Element element, Element oppositeElement, Element playerStore, Move.Turn player) {
+
     }
 }

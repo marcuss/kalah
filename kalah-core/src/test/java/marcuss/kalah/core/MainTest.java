@@ -139,6 +139,23 @@ public class MainTest {
                 new Integer(6),
                 game.getBoard().getHouses2().get(2).getValue()
         );
+    }
 
+    @Test
+    public void test1stMoveCapture() {
+        Game game = Game.startGame(GameConfig.DEFAULT); //3 seeds
+        game.move(0); //house 1 now is empty
+        game.move(1); //Player 2, house 2 empty, house 3-5 = 4 seeds
+        game.move(3); // I t should land in the empty 1 house and capture 3 player 2 seeds.
+
+        assertEquals(
+                new Integer(4),
+                game.getBoard().getStore1().getValue()
+        );
+
+        assertEquals(
+                new Integer(4),
+                game.getBoard().getStore1().getValue()
+        );
     }
 }
