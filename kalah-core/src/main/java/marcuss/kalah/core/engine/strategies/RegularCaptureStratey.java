@@ -1,8 +1,8 @@
 package marcuss.kalah.core.engine.strategies;
 
-import marcuss.kalah.core.domain.Board.Element;
-import marcuss.kalah.core.domain.Board.House;
-import marcuss.kalah.core.domain.Board.Store;
+import marcuss.kalah.core.domain.Element;
+import marcuss.kalah.core.domain.House;
+import marcuss.kalah.core.domain.Store;
 import marcuss.kalah.core.domain.Move;
 
 public class RegularCaptureStratey implements CaptureStrategy {

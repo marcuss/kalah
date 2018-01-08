@@ -1,6 +1,6 @@
 package marcuss.kalah.core.engine.strategies;
 
-import marcuss.kalah.core.domain.Board;
+import marcuss.kalah.core.domain.Element;
 import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.config.GameConfig;
 
@@ -21,7 +21,7 @@ public class ClockWiseStepping implements SteppingDirectionStrategy {
 
     //todo: implement
     @Override
-    public Iterator<Board.Element> getIterator(Move move, int house) {
+    public Iterator<Element> getIterator(Move move, int house) {
         return null;
     }
 }

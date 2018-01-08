@@ -1,6 +1,6 @@
 package marcuss.kalah.core;
 
-import marcuss.kalah.core.domain.Board.House;
+import marcuss.kalah.core.domain.House;
 import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.AwariGameEngine;
 import marcuss.kalah.core.engine.CustomGameEngine;

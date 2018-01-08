@@ -1,7 +1,7 @@
 package marcuss.kalah.core.engine.strategies;
 
 import marcuss.kalah.core.domain.Board;
-import marcuss.kalah.core.domain.Board.Element;
+import marcuss.kalah.core.domain.Element;
 import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.config.GameConfig;
 

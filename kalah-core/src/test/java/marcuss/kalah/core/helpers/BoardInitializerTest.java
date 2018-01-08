@@ -1,7 +1,7 @@
 package marcuss.kalah.core.helpers;
 
 import marcuss.kalah.core.domain.Board;
-import marcuss.kalah.core.domain.Board.Element;
+import marcuss.kalah.core.domain.Element;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -42,12 +42,12 @@ class BoardInitializerTest {
 
         assertEquals(
                 new Integer(0),
-                board.getStore1()
+                board.getStore1().getSeeds()
         );
 
         assertEquals(
                 new Integer(0),
-                board.getStore2()
+                board.getStore2().getSeeds()
         );
     }
 }
