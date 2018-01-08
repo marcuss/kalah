@@ -22,6 +22,26 @@ public abstract class GameEngine {
 
     public Move move(Move move, int house) {
         validateMove(move, house);
+        Board.Element element = sowSeeds(move, house);
+        captureLastPosition(move, element);
+        defineNextTurn(move, element);
+        return  doMove(move, element);
+    }
+
+    private void defineNextTurn(Move move, Board.Element element) {
+        if (! (element instanceof Store)) {
+            switch (move.getTurn()) {
+                case PLAYER1:
+                    move.setTurn(Move.Turn.PLAYER2);
+                    break;
+                case PLAYER2:
+                    move.setTurn(Move.Turn.PLAYER1);
+                    break;
+            }
+        }
+    }
+
+    private Board.Element sowSeeds(Move move, int house) {
         Board board = move.getCurrentBoard();
         board.setBoardIterator(
                 steppingStrategy.getIterator(move, house)
@@ -33,37 +53,26 @@ public abstract class GameEngine {
         while (iterator.hasNext()) {
             element = iterator.next();
             if (sowingSeeds == null) {
-                sowingSeeds = element.getValue();
-                element.setValue(0);
+                sowingSeeds = element.getSeeds();
+                element.setSeeds(0);
             } else {
-                element.setValue(element.getValue() + 1);
+                element.setSeeds(element.getSeeds() + 1);
                 sowingSeeds--;
                 if (sowingSeeds <= 0) {
                     break;
                 }
             }
         }
-        //Todo: use the capture strategy.
+        return element;
+    }
+
+    private void captureLastPosition(Move move, Board.Element element) {
         captureStrategy.capture(
                 element,
                 getOppositeElement(element, move),
                 getPlayerStore(move),
                 move.getTurn()
         );
-
-
-        if (! (element instanceof Store)) {
-            switch (move.getTurn()) {
-                case PLAYER1:
-                    move.setTurn(Move.Turn.PLAYER2);
-                    break;
-                case PLAYER2:
-                    move.setTurn(Move.Turn.PLAYER1);
-                    break;
-            }
-        }
-
-        return  doMove(move, element);
     }
 
     private void validateMove(Move move, int house) {
@@ -71,6 +80,7 @@ public abstract class GameEngine {
         if (house < 0 || house > board.getHouses1().size()) throw new InvalidMove("Invalid house number.");
     }
 
+    // extension point, unused as for now.
     protected Move doMove(Move move, Board.Element element) {
         return move;
     }

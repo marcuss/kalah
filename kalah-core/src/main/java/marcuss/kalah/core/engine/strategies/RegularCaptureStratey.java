@@ -24,11 +24,11 @@ public class RegularCaptureStratey implements CaptureStrategy {
         }
 
         if (element instanceof House
-                && element.getValue().equals(1)
+                && element.getSeeds().equals(1)
                 && player.equals((element).getOwner())
-                && oppositeElement.getValue() > 0) {
-            playerStore.setValue(playerStore.getValue() + oppositeElement.getValue() + element.getValue());
-            element.setValue(0);
+                && oppositeElement.getSeeds() > 0) {
+            playerStore.setSeeds(playerStore.getSeeds() + oppositeElement.getSeeds() + element.getSeeds());
+            element.setSeeds(0);
         }
     }
 }

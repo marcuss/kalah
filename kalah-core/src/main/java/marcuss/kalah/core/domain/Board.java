@@ -12,22 +12,22 @@ import java.util.function.Consumer;
 public class Board implements Iterable<Board.Element>{
 
     public static abstract class Element{
-       public abstract Integer getValue();
-       public abstract void setValue(Integer value);
+       public abstract Integer getSeeds();
+       public abstract void setSeeds(Integer seeds);
        public abstract Move.Turn getOwner();
     }
 
     @Data
     @Builder
     public static class House extends Element{
-        Integer value; //This is duplicate due lombok compatibility.
+        Integer seeds; //This is duplicate due lombok compatibility.
         Move.Turn owner;
         Integer pos;
     }
     @Data
     @Builder
     public static class Store extends Element{
-        Integer value;
+        Integer seeds;
         Move.Turn owner;
     }
     private Element store1;

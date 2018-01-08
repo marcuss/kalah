@@ -112,43 +112,43 @@ public class MainTest {
 
         assertEquals(
                 new Integer(0),
-                game.getBoard().getHouses1().get(3).getValue()
+                game.getBoard().getHouses1().get(3).getSeeds()
         );
 
         assertEquals(
                 new Integer(7),
-                game.getBoard().getHouses1().get(2).getValue()
+                game.getBoard().getHouses1().get(2).getSeeds()
         );
 
         assertEquals(
                 new Integer(7),
-                game.getBoard().getHouses1().get(1).getValue()
+                game.getBoard().getHouses1().get(1).getSeeds()
         );
 
         assertEquals(
                 new Integer(7),
-                game.getBoard().getHouses1().get(0).getValue()
+                game.getBoard().getHouses1().get(0).getSeeds()
         );
 
         assertEquals(
                 new Integer(1),
-                game.getBoard().getStore1().getValue()
+                game.getBoard().getStore1().getSeeds()
         );
 
 
         assertEquals(
                 new Integer(7),
-                game.getBoard().getHouses2().get(0).getValue()
+                game.getBoard().getHouses2().get(0).getSeeds()
         );
 
         assertEquals(
                 new Integer(7),
-                game.getBoard().getHouses2().get(1).getValue()
+                game.getBoard().getHouses2().get(1).getSeeds()
         );
 
         assertEquals(
                 new Integer(6),
-                game.getBoard().getHouses2().get(2).getValue()
+                game.getBoard().getHouses2().get(2).getSeeds()
         );
     }
 
@@ -158,28 +158,28 @@ public class MainTest {
         game.move(0); //Player1, house 0 now is empty
         assertEquals(
                 new Integer(0),
-                game.getBoard().getHouses1().get(0).getValue()
+                game.getBoard().getHouses1().get(0).getSeeds()
         );
         assertEquals(
                 new Integer(1),
-                game.getBoard().getStore1().getValue()
+                game.getBoard().getStore1().getSeeds()
         );
 
         game.move(5); //Player2, house 5 empty
         assertEquals(
                 new Integer(0),
-                game.getBoard().getHouses2().get(5).getValue()
+                game.getBoard().getHouses2().get(5).getSeeds()
         );
         assertEquals(
                 new Integer(1),
-                game.getBoard().getStore2().getValue()
+                game.getBoard().getStore2().getSeeds()
         );
 
         game.move(3); // I t should land in the empty 0 house and capture 3 Player2 seeds.
 
         assertEquals(
                 new Integer(6), //1 from the first move, 1 landing seed, and 5 in the rival opposite house.
-                game.getBoard().getStore1().getValue()
+                game.getBoard().getStore1().getSeeds()
         );
     }
 
@@ -203,7 +203,7 @@ public class MainTest {
 
         assertEquals(
                 new Integer(expectedStore),
-                game.getBoard().getStore1().getValue()
+                game.getBoard().getStore1().getSeeds()
         );
     }
     @ParameterizedTest
@@ -227,7 +227,7 @@ public class MainTest {
 
         assertEquals(
                 new Integer(expectedStore),
-                game.getBoard().getStore2().getValue()
+                game.getBoard().getStore2().getSeeds()
         );
     }
 }

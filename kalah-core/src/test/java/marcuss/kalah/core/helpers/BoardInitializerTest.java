@@ -18,21 +18,21 @@ class BoardInitializerTest {
         Board board = BoardInitializer.initKalah(houses, seeds);
 
         assertEquals(houses,
-                board.getHouses1().stream().filter(h -> h.getValue() == seeds)
+                board.getHouses1().stream().filter(h -> h.getSeeds() == seeds)
                         .count()
         );
 
         assertEquals(houses,
-                board.getHouses2().stream().filter(h -> h.getValue() == seeds)
+                board.getHouses2().stream().filter(h -> h.getSeeds() == seeds)
                         .count()
         );
 
         assertEquals(houses * 2 * seeds,
                 board.getHouses2().stream()
-                        .mapToInt(Element::getValue).sum()
+                        .mapToInt(Element::getSeeds).sum()
                         +
                         board.getHouses2().stream()
-                                .mapToInt(Element::getValue).sum()
+                                .mapToInt(Element::getSeeds).sum()
         );
 
         assertEquals(
