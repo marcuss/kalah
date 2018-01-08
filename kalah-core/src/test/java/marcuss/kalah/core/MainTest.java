@@ -1,5 +1,6 @@
 package marcuss.kalah.core;
 
+import marcuss.kalah.core.domain.Board.House;
 import marcuss.kalah.core.domain.Move;
 import marcuss.kalah.core.engine.AwariGameEngine;
 import marcuss.kalah.core.engine.CustomGameEngine;
@@ -10,13 +11,13 @@ import marcuss.kalah.core.engine.strategies.RegularCaptureStratey;
 import marcuss.kalah.core.exception.InvalidMove;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static marcuss.kalah.core.domain.Move.State.STARTED;
 import static marcuss.kalah.core.domain.Move.Turn.PLAYER1;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import static marcuss.kalah.core.domain.Move.Turn.PLAYER2;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
 
@@ -74,6 +75,16 @@ public class MainTest {
                 PLAYER1,
                 game.getCurrentMove().getTurn()
         );
+
+        assertEquals(
+                PLAYER1,
+                ((House) game.getBoard().getHouses1().get(0)).getOwner()
+                );
+
+        assertEquals(
+                PLAYER2,
+                ((House) game.getBoard().getHouses2().get(0)).getOwner()
+                );
     }
 
     @ParameterizedTest
@@ -142,7 +153,7 @@ public class MainTest {
     }
 
     @Test
-    public void testCapture() {
+    public void testRoundMoveAndCapture() {
         Game game = Game.startGame(GameConfig.DEFAULT); //3 seeds
         game.move(0); //Player1, house 0 now is empty
         assertEquals(
@@ -153,15 +164,70 @@ public class MainTest {
                 new Integer(1),
                 game.getBoard().getStore1().getValue()
         );
+
         game.move(5); //Player2, house 5 empty
+        assertEquals(
+                new Integer(0),
+                game.getBoard().getHouses2().get(5).getValue()
+        );
+        assertEquals(
+                new Integer(1),
+                game.getBoard().getStore2().getValue()
+        );
 
         game.move(3); // I t should land in the empty 0 house and capture 3 Player2 seeds.
 
         assertEquals(
-                new Integer(7), //1 from the first move, 1 landing seed, and 5 in the rival opposite house.
+                new Integer(6), //1 from the first move, 1 landing seed, and 5 in the rival opposite house.
                 game.getBoard().getStore1().getValue()
         );
+    }
 
+    @ParameterizedTest
+    @CsvSource({
+            "3, 4, 0, 1",
+            "3, 4, 1, 1",
+            "3, 4, 2, 1",
+            "3, 4, 3, 0",
+            "8, 3, 0, 2",
+            "8, 3, 1, 1",
+            "9, 3, 1, 2",
+            "10, 3, 2, 2"
+    })
+    public void testExtremeCasesPlayer1(int configSeeds, int configHouses, int moveHouse, int expectedStore) {
+        GameConfig config = GameConfig.DEFAULT;
+        config.setHouses(configHouses);
+        config.setSeeds(configSeeds);
+        Game game = Game.startGame(config);
+        game.move(moveHouse);
 
+        assertEquals(
+                new Integer(expectedStore),
+                game.getBoard().getStore1().getValue()
+        );
+    }
+    @ParameterizedTest
+    @CsvSource({
+            "3, 3, 4, 0, 0",
+            "3, 3, 4, 1, 1",
+            "3, 3, 4, 2, 1",
+            "3, 3, 4, 3, 1",
+            "2, 8, 3, 0, 1",
+            "2, 8, 3, 1, 2",
+            "2, 8, 3, 2, 2"
+    })
+    public void testExtremeCasesPlayer2(int emptyPlayer1House, int configSeeds, int configHouses, int moveHouse, int expectedStore) {
+        GameConfig config = GameConfig.DEFAULT;
+        config.setHouses(configHouses);
+        config.setSeeds(configSeeds);
+        Game game = Game.startGame(config);
+        game.move(emptyPlayer1House);
+        assertEquals(Move.Turn.PLAYER2, game.getCurrentMove().getTurn());
+        game.move(moveHouse);
+
+        assertEquals(
+                new Integer(expectedStore),
+                game.getBoard().getStore2().getValue()
+        );
     }
 }
