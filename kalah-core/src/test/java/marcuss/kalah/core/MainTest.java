@@ -142,20 +142,26 @@ public class MainTest {
     }
 
     @Test
-    public void test1stMoveCapture() {
+    public void testCapture() {
         Game game = Game.startGame(GameConfig.DEFAULT); //3 seeds
-        game.move(0); //house 1 now is empty
-        game.move(1); //Player 2, house 2 empty, house 3-5 = 4 seeds
-        game.move(3); // I t should land in the empty 1 house and capture 3 player 2 seeds.
+        game.move(0); //Player1, house 0 now is empty
+        assertEquals(
+                new Integer(0),
+                game.getBoard().getHouses1().get(0).getValue()
+        );
+        assertEquals(
+                new Integer(1),
+                game.getBoard().getStore1().getValue()
+        );
+        game.move(5); //Player2, house 5 empty
+
+        game.move(3); // I t should land in the empty 0 house and capture 3 Player2 seeds.
 
         assertEquals(
-                new Integer(4),
+                new Integer(7), //1 from the first move, 1 landing seed, and 5 in the rival opposite house.
                 game.getBoard().getStore1().getValue()
         );
 
-        assertEquals(
-                new Integer(4),
-                game.getBoard().getStore1().getValue()
-        );
+
     }
 }
