@@ -12,4 +12,6 @@ public class Player {
     private Store store;
 
     private List<Element> houses;
+
+    private int score;
 }

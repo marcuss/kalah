@@ -9,6 +9,9 @@ import marcuss.kalah.core.exception.InvalidMove;
 
 import java.util.Iterator;
 
+import static marcuss.kalah.core.domain.Move.State.FINISHED;
+import static marcuss.kalah.core.domain.Move.State.RUNNING;
+
 @Data
 public abstract class GameEngine {
 
@@ -24,7 +27,16 @@ public abstract class GameEngine {
         if (element instanceof House) {
             captureLastPosition(move, (House) element);
         }
-        defineNextTurn(move, element);
+
+        scoringStrategy.score(move.getCurrentPlayer());
+        scoringStrategy.score(move.getOppositePlayer());
+
+        if (isFinished(move)) {
+            move.setState(FINISHED);
+        } else {
+            move.setState(RUNNING);
+            defineNextTurn(move, element);
+        }
         return move;
     }
 
@@ -65,6 +77,14 @@ public abstract class GameEngine {
                 move.getCurrentPlayer().getStore(),
                 move.getTurn()
         );
+    }
+
+    private boolean isFinished(Move move) {
+        if (move.getCurrentPlayer().getHouses().stream().mapToInt(h -> h.getSeeds().intValue()).sum() == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void defineNextTurn(Move move, Element element) {
