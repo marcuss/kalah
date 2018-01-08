@@ -32,7 +32,7 @@ public abstract class GameEngine {
 
     private void validateMove(Move move, int house) {
         Board board = move.getCurrentBoard();
-        if (house < 0 || house > board.getHouses1().size()) throw new InvalidMove("Invalid house number.");
+        if (house < 0 || house > board.getPlayer1().getHouses().size()) throw new InvalidMove("Invalid house number.");
     }
 
     private Element sowSeeds(Move move, int house) {
@@ -94,9 +94,9 @@ public abstract class GameEngine {
         }
         switch (element.getOwner()) {
             case PLAYER1:
-                return move.getCurrentBoard().getHouses2().get(((House) element).getPos());
+                return move.getCurrentBoard().getPlayer2().getHouses().get(((House) element).getPos());
             case PLAYER2:
-                return move.getCurrentBoard().getHouses1().get(((House) element).getPos());
+                return move.getCurrentBoard().getPlayer1().getHouses().get(((House) element).getPos());
             default:
                 return null;
         }
@@ -107,9 +107,9 @@ public abstract class GameEngine {
     private Element getPlayerStore(Move move) {
         switch (move.getTurn()) {
             case PLAYER1:
-                return move.getCurrentBoard().getStore1();
+                return move.getCurrentBoard().getPlayer1().getStore();
             case PLAYER2:
-                return move.getCurrentBoard().getStore2();
+                return move.getCurrentBoard().getPlayer2().getStore();
             default:
                 return null;
         }

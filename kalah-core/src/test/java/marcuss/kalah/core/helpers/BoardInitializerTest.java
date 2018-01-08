@@ -18,36 +18,36 @@ class BoardInitializerTest {
         Board board = BoardInitializer.initKalah(houses, seeds);
 
         assertEquals(houses,
-                board.getHouses1().stream().filter(h -> h.getSeeds() == seeds)
+                board.getPlayer1().getHouses().stream().filter(h -> h.getSeeds() == seeds)
                         .count()
         );
 
         assertEquals(houses,
-                board.getHouses2().stream().filter(h -> h.getSeeds() == seeds)
+                board.getPlayer2().getHouses().stream().filter(h -> h.getSeeds() == seeds)
                         .count()
         );
 
         assertEquals(houses * 2 * seeds,
-                board.getHouses2().stream()
+                board.getPlayer2().getHouses().stream()
                         .mapToInt(Element::getSeeds).sum()
                         +
-                        board.getHouses2().stream()
+                        board.getPlayer2().getHouses().stream()
                                 .mapToInt(Element::getSeeds).sum()
         );
 
         assertEquals(
-                board.getHouses1().size(),
-                board.getHouses2().size()
+                board.getPlayer1().getHouses().size(),
+                board.getPlayer2().getHouses().size()
         );
 
         assertEquals(
                 new Integer(0),
-                board.getStore1().getSeeds()
+                board.getPlayer1().getStore().getSeeds()
         );
 
         assertEquals(
                 new Integer(0),
-                board.getStore2().getSeeds()
+                board.getPlayer2().getStore().getSeeds()
         );
     }
 }

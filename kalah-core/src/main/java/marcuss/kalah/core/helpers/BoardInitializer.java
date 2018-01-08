@@ -15,10 +15,6 @@ public class BoardInitializer {
 
     public static Board initKalah(int houses, final int seeds) {
         return builder()
-                .houses1(initHouses(houses, seeds, PLAYER1))
-                .houses2(initHouses(houses, seeds, PLAYER2))
-                .store1(Store.builder().owner(PLAYER1).seeds(0).build())
-                .store2(Store.builder().owner(PLAYER2).seeds(0).build())
                 .player1(
                         Player.builder()
                                 .houses(initHouses(houses, seeds, PLAYER1))
