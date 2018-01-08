@@ -47,30 +47,33 @@ public class CounterClockWiseStepping implements SteppingDirectionStrategy {
 
         private void buildInternalState(Move current, int house) {
             Board board = current.getCurrentBoard();
+            List<Element> player1Houses = board.getPlayer1().getHouses();
+            List<Element> player2Houses = board.getPlayer2().getHouses();
+            final int size = player2Houses.size();
+
             switch (current.getTurn()) {
                 case PLAYER1:
                     for (int i = house; i >= 0; i--) {
-                        internalState.add(board.getPlayer1().getHouses().get(i));
+                        internalState.add(player1Houses.get(i));
                     }
                     internalState.add(board.getPlayer1().getStore());
-                    internalState.addAll(board.getPlayer2().getHouses());
-                    for (int i = board.getPlayer1().getHouses().size() - 1; i > house; i--) {
-                        internalState.add(board.getPlayer1().getHouses().get(i));
+                    internalState.addAll(player2Houses);
+                    for (int i = size - 1; i > house; i--) {
+                        internalState.add(player1Houses.get(i));
                     }
                     break;
 
                 case PLAYER2:
-                    for (int i = house; i <= board.getPlayer2().getHouses().size() - 1; i++) {
-                        internalState.add(board.getPlayer2().getHouses().get(i));
+
+                    for (int i = house; i <= size - 1; i++) {
+                        internalState.add(player2Houses.get(i));
                     }
                     internalState.add(board.getPlayer2().getStore());
-
-                    for (int i = board.getPlayer1().getHouses().size() - 1; i >= 0; i--) {
-                        internalState.add(board.getPlayer1().getHouses().get(i));
+                    for (int i = size - 1; i >= 0; i--) {
+                        internalState.add(player1Houses.get(i));
                     }
-
                     for (int i = 0; i < house; i++) {
-                        internalState.add(board.getPlayer2().getHouses().get(i));
+                        internalState.add(player2Houses.get(i));
                     }
                     break;
 

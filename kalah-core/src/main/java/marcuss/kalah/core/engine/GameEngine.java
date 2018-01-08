@@ -1,11 +1,7 @@
 package marcuss.kalah.core.engine;
 
 import lombok.Data;
-import marcuss.kalah.core.domain.Board;
-import marcuss.kalah.core.domain.Store;
-import marcuss.kalah.core.domain.Element;
-import marcuss.kalah.core.domain.House;
-import marcuss.kalah.core.domain.Move;
+import marcuss.kalah.core.domain.*;
 import marcuss.kalah.core.engine.strategies.CaptureStrategy;
 import marcuss.kalah.core.engine.strategies.ScoringStrategy;
 import marcuss.kalah.core.engine.strategies.SteppingDirectionStrategy;
@@ -25,9 +21,11 @@ public abstract class GameEngine {
     public Move move(Move move, int house) {
         validateMove(move, house);
         Element element = sowSeeds(move, house);
-        captureLastPosition(move, element);
+        if (element instanceof House) {
+            captureLastPosition(move, (House) element);
+        }
         defineNextTurn(move, element);
-        return  doMove(move, element);
+        return move;
     }
 
     private void validateMove(Move move, int house) {
@@ -60,17 +58,17 @@ public abstract class GameEngine {
         return element;
     }
 
-    private void captureLastPosition(Move move, Element element) {
+    private void captureLastPosition(Move move, House house) {
         captureStrategy.capture(
-                element,
-                getOppositeElement(element, move),
-                getPlayerStore(move),
+                house,
+                move.getOppositePlayer().getHouses().get(house.getPos()),
+                move.getCurrentPlayer().getStore(),
                 move.getTurn()
         );
     }
 
     private void defineNextTurn(Move move, Element element) {
-        if (! (element instanceof Store)) {
+        if (!(element instanceof Store)) {
             switch (move.getTurn()) {
                 case PLAYER1:
                     move.setTurn(Move.Turn.PLAYER2);
@@ -79,39 +77,6 @@ public abstract class GameEngine {
                     move.setTurn(Move.Turn.PLAYER1);
                     break;
             }
-        }
-    }
-
-    // extension point, unused as for now.
-    protected Move doMove(Move move, Element element) {
-        return move;
-    }
-
-
-    private Element getOppositeElement(Element element, Move move) {
-        if (!(element instanceof House)) {
-            return null;
-        }
-        switch (element.getOwner()) {
-            case PLAYER1:
-                return move.getCurrentBoard().getPlayer2().getHouses().get(((House) element).getPos());
-            case PLAYER2:
-                return move.getCurrentBoard().getPlayer1().getHouses().get(((House) element).getPos());
-            default:
-                return null;
-        }
-    }
-
-    //Is becoming increasingly apparent that elements should be grouped by player in the board.
-    //TODO: refactor this to be part of the board structure.
-    private Element getPlayerStore(Move move) {
-        switch (move.getTurn()) {
-            case PLAYER1:
-                return move.getCurrentBoard().getPlayer1().getStore();
-            case PLAYER2:
-                return move.getCurrentBoard().getPlayer2().getStore();
-            default:
-                return null;
         }
     }
 }

@@ -15,8 +15,8 @@ public class StrategyChooserHelper {
     //TODO: This approach altho was to prevent coupling, ended up coupling whole lot more,
     //this must be change to an spring like approach @Component... @Autowire List<Strategies>
     //That would do basically the same, list all available strategies, and help choose the right one.
-    //This same class can be used to retrieve all the strategies from the application context and keep the
-    //changes in this class.
+    //This same class can be used to retrieve all the strategies from the application context and isolate the
+    //changes to this class.
     public static void setSteppingDirectionStrategy(GameConfig.SteppingDirection direction, GameEngine engine) {
         Set<Class<? extends SteppingDirectionStrategy>> availableSteppingStrategies =
                 new Reflections("marcuss.kalah.core.engine.strategies")

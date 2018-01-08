@@ -21,4 +21,26 @@ public class Move {
 
     private Turn turn;
 
+    public Player getCurrentPlayer() {
+        switch (turn) {
+            case PLAYER1:
+                return currentBoard.getPlayer1();
+            case PLAYER2:
+                return currentBoard.getPlayer2();
+            default:
+                return null;
+        }
+    }
+
+    public Player getOppositePlayer() {
+        switch (turn) {
+            case PLAYER1:
+                return currentBoard.getPlayer2();
+            case PLAYER2:
+                return currentBoard.getPlayer1();
+            default:
+                return null;
+        }
+    }
+
 }

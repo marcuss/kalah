@@ -18,6 +18,6 @@ public class EmptyCaptureStrategy implements CaptureStrategy {
 
     @Override
     public void capture(Element element, Element oppositeElement, Element playerStore, Move.Turn player) {
-
+    //Todo: implement.
     }
 }
