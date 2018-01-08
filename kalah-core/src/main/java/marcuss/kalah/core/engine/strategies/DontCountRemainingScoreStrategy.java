@@ -15,7 +15,7 @@ public class DontCountRemainingScoreStrategy implements ScoringStrategy {
     }
 
     @Override
-    public int score(Player player) {
-        return player.getStore().getSeeds();
+    public void score(Player player) {
+        player.setScore(player.getStore().getSeeds());
     }
 }

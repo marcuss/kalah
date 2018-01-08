@@ -15,11 +15,11 @@ import static marcuss.kalah.core.domain.Move.State.RUNNING;
 @Data
 public abstract class GameEngine {
 
-    protected SteppingDirectionStrategy steppingStrategy;
+    public SteppingDirectionStrategy steppingStrategy;
 
-    protected CaptureStrategy captureStrategy;
+    public CaptureStrategy captureStrategy;
 
-    protected ScoringStrategy scoringStrategy;
+    public ScoringStrategy scoringStrategy;
 
     public Move move(Move move, int house) {
         validateMove(move, house);

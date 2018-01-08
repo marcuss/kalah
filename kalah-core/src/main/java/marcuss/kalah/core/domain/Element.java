@@ -1,6 +1,8 @@
 package marcuss.kalah.core.domain;
 
-public abstract class Element {
+import java.io.Serializable;
+
+public abstract class Element implements Serializable{
    public abstract Integer getSeeds();
    public abstract void setSeeds(Integer seeds);
    public abstract Move.Turn getOwner();

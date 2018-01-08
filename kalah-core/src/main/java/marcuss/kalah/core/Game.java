@@ -19,6 +19,8 @@ public abstract class Game {
 
     private Move currentMove;
 
+    private GameConfig config;
+
     public static Game startGame(GameConfig config) {
         if (config.equals(GameConfig.DEFAULT)) {
             return new AwariGame(config);
@@ -35,10 +37,17 @@ public abstract class Game {
                 .state(STARTED)
                 .turn(PLAYER1)
                 .build();
+        this.config = config;
     }
 
     public Move move(int house){
         Move resultMove = engine.move(currentMove, house);
+        board = resultMove.getCurrentBoard();
+        return resultMove;
+    }
+
+    public Move move(int house, Move move){
+        Move resultMove = engine.move(move, house);
         board = resultMove.getCurrentBoard();
         return resultMove;
     }
